@@ -1,0 +1,20 @@
+Robots:
+- robot_name: "jackal"
+  description: "Clearpath Jackal mobile skid-steer platform"
+  reliability: 0.8
+  urdf:
+    package_name: "jackal_description"
+    executable: "urdf/jackal.urdf.xacro"
+  navigation:
+    controller:
+      package_name: "temoto_ws"
+      executable: "jackal_controller.launch"
+      global_planner: "navfn/NavfnROS"       
+      local_planner: "dwa_local_planner/DWAPlannerROS"
+      scan_topic: "front/scan"
+      pose_topic: "amcl_pose"
+    driver:
+      package_name: "temoto_ws" 
+      executable: "jackal_driver.launch"
+      odom_topic: "jackal_velocity_controller/odom"
+      cmd_vel_topic: "jackal_velocity_controller/cmd_vel"      

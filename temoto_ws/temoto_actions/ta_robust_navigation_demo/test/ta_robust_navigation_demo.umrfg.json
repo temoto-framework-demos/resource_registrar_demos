@@ -1,0 +1,13 @@
+{
+    "graph_name": "ta_robust_navigation_demo",
+    "graph_description": "",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaRobustNavigationDemo",
+            "package_name": "ta_robust_navigation_demo",
+            "id": 0,
+            "effect": "synchronous"
+        }
+    ]
+}

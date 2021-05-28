@@ -1,0 +1,33 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="map_file" default="$(find temoto_ws)/maps/jackal_rr_demo_map_2.yaml"/>
+    <!-- <arg name="map_file" default="$(find jackal_setup)/maps/delta_3rd_floor/map.pgm"/> -->
+
+  <arg name="move_forward_only" default="true"/>
+
+
+  <!-- Map server -->
+  <!-- <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/> -->
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+  
+  <!-- AMCL -->
+  <include file="$(find temoto_ws)/launch/amcl.launch"/>
+  
+<!-- move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <param name="base_global_planner" type="string" value="global_planner/GlobalPlanner" />
+    <rosparam file="$(find jackal_setup)/params/common/sbpl_global_params.yaml" command="load" />
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <rosparam file="$(find jackal_setup)/params/dwa_planner/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find jackal_setup)/params/dwa_planner/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find jackal_setup)/params/dwa_planner/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find jackal_setup)/params/dwa_planner/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find jackal_setup)/params/dwa_planner/move_base_params.yaml" command="load" />
+    <rosparam file="$(find jackal_setup)/params/dwa_planner/dwa_local_planner_params.yaml" command="load" />
+    <remap from="odom" to="odometry/filtered"/>
+    <!-- <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" /> -->
+  </node>
+
+  <!-- rviz -->
+</launch>

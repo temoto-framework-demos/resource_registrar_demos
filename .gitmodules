@@ -1,0 +1,4 @@
+[submodule "temoto"]
+	path = temoto
+	url = https://github.com/temoto-telerobotics/temoto
+	branch = devel
