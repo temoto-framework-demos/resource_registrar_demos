@@ -19,7 +19,7 @@
 
 /* REQUIRED BY TEMOTO */
 #include <class_loader/class_loader.hpp>
-#include "ta_robot_manager_tests/temoto_action.h"
+#include "ta_robust_navigation_demo/temoto_action.h"
 #include "temoto_component_manager/component_manager_interface.h"
 #include "temoto_robot_manager/robot_manager_interface.h"
 #include "tf/tf.h"
