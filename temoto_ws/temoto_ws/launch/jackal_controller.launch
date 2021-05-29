@@ -15,7 +15,7 @@
   <include file="$(find temoto_ws)/launch/amcl.launch"/>
   
 <!-- move_base -->
-  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" required="true">
     <param name="base_global_planner" type="string" value="global_planner/GlobalPlanner" />
     <rosparam file="$(find jackal_setup)/params/common/sbpl_global_params.yaml" command="load" />
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />

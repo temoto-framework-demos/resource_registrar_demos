@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(ta_robust_navigation_demo)
 
 # use c++11 standard
-add_compile_options(-std=c++14)
+add_compile_options(-std=c++14 -g)
 option(TEMOTO_ENABLE_TRACING "Use tracer" OFF)
 
 if(TEMOTO_ENABLE_TRACING)
