@@ -1,6 +1,6 @@
 <launch>
   <!-- Arguments -->
-  <arg name="map_file" default="$(find temoto_ws)/maps/jackal_rr_demo_map_2.yaml"/>
+  <arg name="map_file" default="$(find temoto_ws)/maps/jackal_rr_demo_map_3.yaml"/>
     <!-- <arg name="map_file" default="$(find jackal_setup)/maps/delta_3rd_floor/map.pgm"/> -->
 
   <arg name="move_forward_only" default="true"/>

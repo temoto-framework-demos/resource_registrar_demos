@@ -30,3 +30,12 @@ Components:
   required_parameters:
     frame_id: "jackal_2d_lidar"
     serial_port: "/dev/ttyACM1"
+
+- component_name: "SICK 2D LIDAR"
+  component_type: "2d_lidar"
+  package_name: "temoto_ws"
+  executable:  "sick_lidar_remappable.launch"
+  output_topics:
+    lidar_data_2d: "scan"
+  required_parameters:
+    frame_id: "jackal_2d_lidar"

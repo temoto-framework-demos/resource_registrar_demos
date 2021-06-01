@@ -1,6 +1,6 @@
 <launch>
   <!-- Arguments -->
-  <arg name="map_file" default="$(find temoto_ws)/maps/jackal_rr_demo_map_2.yaml"/>
+  <arg name="map_file" default="$(find temoto_ws)/maps/jackal_rr_demo_map_3.yaml"/>
     <!-- <arg name="map_file" default="$(find jackal_setup)/maps/delta_3rd_floor/map.pgm"/> -->
 
   <arg name="move_forward_only" default="true"/>
@@ -25,7 +25,7 @@
     <rosparam file="$(find jackal_setup)/params/dwa_planner/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find jackal_setup)/params/dwa_planner/move_base_params.yaml" command="load" />
     <rosparam file="$(find jackal_setup)/params/dwa_planner/dwa_local_planner_params.yaml" command="load" />
-    <remap from="odom" to="odometry/filtered"/>
+    <remap from="odom" to="jackal_velocity_controller/odom"/>
     <!-- <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" /> -->
   </node>
 

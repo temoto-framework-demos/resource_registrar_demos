@@ -40,7 +40,7 @@
         <param name="sw_pll_only_publish" type="bool" value="true"/>
         <remap from="scan" to="$(arg lidar_data_2d)"/>
     </node>
-    <node name="static_2d_lidar_frame_publisher" pkg="tf" type="static_transform_publisher" args="0 0 0.1 0 0 3.14 front_mount front_laser 100"/>
+    <node name="static_2d_lidar_frame_publisher" pkg="tf" type="static_transform_publisher" args="0 0 0.1 0 0 3.14 front_mount /$(arg frame_id) 100"/>
 </launch>
 
         <!--

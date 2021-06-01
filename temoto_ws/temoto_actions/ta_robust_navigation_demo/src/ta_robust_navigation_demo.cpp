@@ -42,19 +42,12 @@ void executeTemotoAction()
 {
   rmi_.initialize(*this);
   cmi_.initialize(*this);
-  cmi_.registerComponentStatusCallback(std::bind(&TaRobustNavigationDemo::componentStatusCallback
-  , this
-  , std::placeholders::_1
-  , std::placeholders::_2));
+  // cmi_.registerComponentStatusCallback(std::bind(&TaRobustNavigationDemo::componentStatusCallback
+  // , this
+  // , std::placeholders::_1
+  // , std::placeholders::_2));
 
   std::string robot_name = "jackal";
-
-  // /*
-  //  * Load the robot
-  //  */
-  // TEMOTO_INFO_STREAM("loading " << robot_name);
-  // rmi_.loadRobot(robot_name);
-  // TEMOTO_INFO_STREAM(robot_name << " initialized");
 
   TEMOTO_INFO_STREAM("trying to get config of '" << robot_name << "' ...");
   YAML::Node robot_config = rmi_.getRobotConfig(robot_name);
@@ -77,34 +70,41 @@ void executeTemotoAction()
   requested_topics.addOutputTopic("lidar_data_2d", lidar_scan_topic);
   ComponentTopicsRes responded_topics = cmi_.startComponent(sensor_type, requested_topics);
 
-  ros::Duration(10).sleep();
-  // /*
-  //  * Move the robot
-  //  */
-  // geometry_msgs::PoseStamped target_pose;
-  // target_pose.pose.position.x = -7;
-  // target_pose.pose.position.y = 4;
-  // target_pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, 0);;
+  /*
+   * Load the robot
+   */
+  TEMOTO_INFO_STREAM("loading " << robot_name);
+  rmi_.loadRobot(robot_name);
+  TEMOTO_INFO_STREAM(robot_name << " initialized");
 
-  // bool goal_reached = false;
-  // while (!goal_reached)
-  // try
-  // {
-  //   TEMOTO_INFO_STREAM("Sending a navigation goal to " << robot_name << " ...");
-  //   if (rmi_.navigationGoal(robot_name, "map", target_pose))
-  //   {
-  //     TEMOTO_INFO_STREAM("Done navigating");
-  //     goal_reached = true;
-  //   }
-  //   else
-  //   {
-  //     TEMOTO_INFO_STREAM("The goal was not reached, requesting the same navigation goal again ... ");
-  //   }
-  // }
-  // catch(const resource_registrar::TemotoErrorStack &e)
-  // {
-  //   TEMOTO_WARN_STREAM("Caught an error, requesting the same navigation goal again ... ");
-  // }
+  //ros::Duration(10).sleep();
+  /*
+   * Move the robot
+   */
+  geometry_msgs::PoseStamped target_pose;
+  target_pose.pose.position.x = -9.5;
+  target_pose.pose.position.y = -1;
+  target_pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, 2.4);
+
+  bool goal_reached = false;
+  while (!goal_reached)
+  try
+  {
+    TEMOTO_INFO_STREAM("Sending a navigation goal to " << robot_name << " ...");
+    if (rmi_.navigationGoal(robot_name, "map", target_pose))
+    {
+      TEMOTO_INFO_STREAM("Done navigating");
+      goal_reached = true;
+    }
+    else
+    {
+      TEMOTO_INFO_STREAM("The goal was not reached, requesting the same navigation goal again ... ");
+    }
+  }
+  catch(const resource_registrar::TemotoErrorStack &e)
+  {
+    TEMOTO_WARN_STREAM("Caught an error, requesting the same navigation goal again ... ");
+  }
 }
 
 // Destructor

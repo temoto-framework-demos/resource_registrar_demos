@@ -29,7 +29,7 @@
     <!-- This environment variable is populated by an env hook in the jackal_base
          package. It looks for a user-generated mag config (eg, from running
          the calibrate_compass script), and falls back on a default one. -->
-    <rosparam file="$(env JACKAL_MAG_CONFIG)" />
+    <rosparam file="$(eval optenv('JACKAL_MAG_CONFIG', find('jackal_base')+'/config/mag_config_default.yaml'))" />
     <rosparam>
       gain: 0.1
       zeta: 0.001
@@ -48,4 +48,6 @@
     <rosparam command="load" file="$(find jackal_base)/config/diagnostic_analyzers.yaml" />
   </node>
 
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  
 </launch>
